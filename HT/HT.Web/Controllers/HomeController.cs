@@ -25,12 +25,7 @@ namespace HT.Web.Controllers
         public IActionResult Get()
         {
             _loggerService.Log("Get成功", Ws.CommonWeb.Logger.LogType.操作日志, Request.Path, Request.Host.Host);
-            dbContext.Users.Add(new EFCode.Entitys.UserEntity
-            {
-                UserName = "dws11",
-                Password = "123123"
-            });
-            dbContext.SaveChanges();
+           
 
             return Ok();
         }
