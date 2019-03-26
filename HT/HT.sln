@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ws.Exceptions", "Ws.Excepti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ws.CommonWeb", "Ws.CommonWeb\Ws.CommonWeb.csproj", "{A33E1A69-3F46-4B72-8318-8621CD955167}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HT.EFCode", "HT.EFCode\HT.EFCode.csproj", "{087A40B6-F22E-4A9A-A281-3C646477B628}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{A33E1A69-3F46-4B72-8318-8621CD955167}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A33E1A69-3F46-4B72-8318-8621CD955167}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A33E1A69-3F46-4B72-8318-8621CD955167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{087A40B6-F22E-4A9A-A281-3C646477B628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{087A40B6-F22E-4A9A-A281-3C646477B628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{087A40B6-F22E-4A9A-A281-3C646477B628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{087A40B6-F22E-4A9A-A281-3C646477B628}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

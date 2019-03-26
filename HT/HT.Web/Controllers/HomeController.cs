@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HT.EFCode.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ws.CommonWeb.Logger.IServices;
@@ -12,16 +13,25 @@ namespace HT.Web.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
-        public ILoggerService _loggerService;
+        private readonly ILoggerService _loggerService;
+        private readonly HTDbContext dbContext;
 
-        public HomeController(ILoggerService loggerService)
+        public HomeController(ILoggerService loggerService, HTDbContext dbContext)
         {
             _loggerService = loggerService;
+            this.dbContext = dbContext;
         }
 
         public IActionResult Get()
         {
             _loggerService.Log("Get成功", Ws.CommonWeb.Logger.LogType.操作日志, Request.Path, Request.Host.Host);
+            dbContext.Users.Add(new EFCode.Entitys.UserEntity
+            {
+                UserName = "dws11",
+                Password = "123123"
+            });
+            dbContext.SaveChanges();
+
             return Ok();
         }
     }
