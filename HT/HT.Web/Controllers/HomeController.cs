@@ -26,7 +26,6 @@ namespace HT.Web.Controllers
         {
             _loggerService.Log("Get成功", Ws.CommonWeb.Logger.LogType.操作日志, Request.Path, Request.Host.Host);
            
-
             return Ok();
         }
     }
