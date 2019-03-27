@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HT.EFCode.Migrations
 {
     [DbContext(typeof(HTDbContext))]
-    [Migration("20190326170920_HongTou_V1_1_1")]
+    [Migration("20190327125502_HongTou_V1_1_1")]
     partial class HongTou_V1_1_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,6 +17,39 @@ namespace HT.EFCode.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
+
+            modelBuilder.Entity("HT.EFCode.Entitys.PermissionEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CareatTime");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("OperationsCode")
+                        .IsRequired()
+                        .HasMaxLength(254);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HT_Permissions");
+                });
+
+            modelBuilder.Entity("HT.EFCode.Entitys.RoleAndPermissionEntity", b =>
+                {
+                    b.Property<long>("RoleId");
+
+                    b.Property<long>("PermissionId");
+
+                    b.HasKey("RoleId", "PermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("HT_RoleAndPermission");
+                });
 
             modelBuilder.Entity("HT.EFCode.Entitys.RoleEntity", b =>
                 {
@@ -45,6 +78,8 @@ namespace HT.EFCode.Migrations
                     b.Property<long>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("HT_UserAndRole");
                 });
@@ -96,11 +131,24 @@ namespace HT.EFCode.Migrations
                     b.ToTable("HT_Users");
                 });
 
+            modelBuilder.Entity("HT.EFCode.Entitys.RoleAndPermissionEntity", b =>
+                {
+                    b.HasOne("HT.EFCode.Entitys.PermissionEntity", "Permission")
+                        .WithMany("RoleAndPermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HT.EFCode.Entitys.RoleEntity", "Role")
+                        .WithMany("RoleAndPermissions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("HT.EFCode.Entitys.UserAndRoleEntity", b =>
                 {
                     b.HasOne("HT.EFCode.Entitys.RoleEntity", "Role")
                         .WithMany("UserAndRoleEntitys")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HT.EFCode.Entitys.UserEntity", "User")

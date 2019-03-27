@@ -35,11 +35,8 @@ namespace HT.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCommonService();//注册中间件
-
-            services.AddDbContextPool<HTDbContext>(options =>
-            {
-                options.UseMySQL(configuration.GetSection("ConnectionStrings").GetSection("MySqlConnection").Value);
-            });
+            services.AddEFDbContext(configuration);//注册DBContext
+           
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

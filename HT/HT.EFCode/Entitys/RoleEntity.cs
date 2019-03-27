@@ -9,5 +9,6 @@ namespace HT.EFCode.Entitys
         public string Name { get; set; }
         public string Description { get; set; }
         public virtual ICollection<UserAndRoleEntity> UserAndRoleEntitys { get; set; } = new HashSet<UserAndRoleEntity>();
+        public virtual ICollection<RoleAndPermissionEntity> RoleAndPermissions { get; set; } = new HashSet<RoleAndPermissionEntity>();
     }
 }

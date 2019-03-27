@@ -16,6 +16,39 @@ namespace HT.EFCode.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
+            modelBuilder.Entity("HT.EFCode.Entitys.PermissionEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CareatTime");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("OperationsCode")
+                        .IsRequired()
+                        .HasMaxLength(254);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HT_Permissions");
+                });
+
+            modelBuilder.Entity("HT.EFCode.Entitys.RoleAndPermissionEntity", b =>
+                {
+                    b.Property<long>("RoleId");
+
+                    b.Property<long>("PermissionId");
+
+                    b.HasKey("RoleId", "PermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("HT_RoleAndPermission");
+                });
+
             modelBuilder.Entity("HT.EFCode.Entitys.RoleEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -43,6 +76,8 @@ namespace HT.EFCode.Migrations
                     b.Property<long>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("HT_UserAndRole");
                 });
@@ -94,11 +129,24 @@ namespace HT.EFCode.Migrations
                     b.ToTable("HT_Users");
                 });
 
+            modelBuilder.Entity("HT.EFCode.Entitys.RoleAndPermissionEntity", b =>
+                {
+                    b.HasOne("HT.EFCode.Entitys.PermissionEntity", "Permission")
+                        .WithMany("RoleAndPermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HT.EFCode.Entitys.RoleEntity", "Role")
+                        .WithMany("RoleAndPermissions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("HT.EFCode.Entitys.UserAndRoleEntity", b =>
                 {
                     b.HasOne("HT.EFCode.Entitys.RoleEntity", "Role")
                         .WithMany("UserAndRoleEntitys")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HT.EFCode.Entitys.UserEntity", "User")

@@ -14,12 +14,10 @@ namespace HT.Web.Controllers
     public class HomeController : ControllerBase
     {
         private readonly ILoggerService _loggerService;
-        private readonly HTDbContext dbContext;
 
-        public HomeController(ILoggerService loggerService, HTDbContext dbContext)
+        public HomeController(ILoggerService loggerService)
         {
             _loggerService = loggerService;
-            this.dbContext = dbContext;
         }
 
         public IActionResult Get()
