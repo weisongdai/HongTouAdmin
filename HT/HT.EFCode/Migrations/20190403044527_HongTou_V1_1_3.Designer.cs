@@ -3,14 +3,16 @@ using System;
 using HT.EFCode.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HT.EFCode.Migrations
 {
     [DbContext(typeof(HTDbContext))]
-    partial class HTDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190403044527_HongTou_V1_1_3")]
+    partial class HongTou_V1_1_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

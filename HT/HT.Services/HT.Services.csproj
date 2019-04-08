@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HT.Repositorys\HT.Repositorys.csproj" />
+    <ProjectReference Include="..\Ws.Exceptions\Ws.Exceptions.csproj" />
+  </ItemGroup>
+
+</Project>

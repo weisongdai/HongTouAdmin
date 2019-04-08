@@ -16,7 +16,8 @@ namespace HT.EFCode.EntityFrameworkCore
         }
 
         public DbSet<UserEntity> Users { get; set; }
-
+        public DbSet<RoleEntity> Roles { get; set; }
+        public DbSet<PermissionEntity> Permissions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("HT.EFCode"));

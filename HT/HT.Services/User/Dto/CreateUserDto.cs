@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HT.EFCode.Entitys
+namespace HT.Services.User.Dto
 {
-    public class UserEntity : BaseEntity
+    public class CreateUserDto
     {
         /// <summary>
         /// 昵称
@@ -14,11 +14,7 @@ namespace HT.EFCode.Entitys
         /// <summary>
         /// 密码
         /// </summary>
-        public string Password { get; set; } 
-        /// <summary>
-        /// 密码盐
-        /// </summary>
-        public string PasswordSalt { get; set; }
+        public string Password { get; set; }
         /// <summary>
         /// 邮箱
         /// </summary>
@@ -27,10 +23,6 @@ namespace HT.EFCode.Entitys
         /// 手机号
         /// </summary>
         public string PhoneNum { get; set; }
-        /// <summary>
-        /// 头像
-        /// </summary>
-        public string Avatar { get; set; }
         /// <summary>
         /// 是否启用
         /// </summary>
@@ -43,9 +35,5 @@ namespace HT.EFCode.Entitys
         /// 身份证号码
         /// </summary>
         public string IDCard { get; set; }
-        /// <summary>
-        /// 导航属性角色
-        /// </summary>
-        public virtual ICollection<UserAndRoleEntity> UserAndRoleEntitys { get; set; } = new HashSet<UserAndRoleEntity>();
     }
 }

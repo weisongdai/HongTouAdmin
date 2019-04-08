@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HT.Web</name>
+    </assembly>
+    <members>
+        <member name="T:HT.Web.Controllers.HomeController">
+            <summary>
+            主页信息
+            </summary>
+        </member>
+        <member name="M:HT.Web.Controllers.HomeController.#ctor(Ws.CommonWeb.Logger.IServices.ILoggerService,HT.Services.User.IUserService)">
+            <summary>
+            
+            </summary>
+            <param name="loggerService"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:HT.Web.Controllers.HomeController.CreateUser(HT.Services.User.Dto.CreateUserDto)">
+            <summary>
+            创建一个用户
+            </summary>
+            <param name="userDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HT.Web.Program.Main(System.String[])">
+            <summary>
+            程序入口
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:HT.Web.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            构建宿主服务,加载配置信息,管道事件
+            IWebHostBuilder:里可以设置webServer的环境
+            WebHost.CreateDefaultBuilder(args)://默认设置
+                :使用 Kestrel Web Server 服务器(监听HTTP请求) Core内置 跨平台(默认)
+                :IIS集成 
+                    UseIIS(),会启动.net core 的 CLR 并且把Web应用 放在IISWorkProseese里(进程) 这个进程要么是W3WP.exe 要么就是IISExprise.exe
+                    UserIISIntegration() 假如运行IIS服务器,允许IIS通过Windows的凭证验证来到Kestrel(对于构建内网的应用有用,)  
+                :Log 配置了Log
+                :IConfiguration 接口
+                
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HT.Web.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:HT.Web.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:HT.Web.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            配置HttpContent上下文管道事件
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

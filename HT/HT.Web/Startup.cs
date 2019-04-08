@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Ws.CommonWeb;
+using Ws.CommonWeb.JwtModels;
 
 namespace HT.Web
 {
@@ -34,13 +35,12 @@ namespace HT.Web
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCommonService();//注册中间件
             services.AddEFDbContext(configuration);//注册DBContext
-           
-
+            services.AddCommonService();//注册中间件
+            services.AddAuthentication(configuration);//添加Token
+            services.AddSwagger();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
-
         /// <summary>
         /// 配置HttpContent上下文管道事件
         /// </summary>
@@ -58,7 +58,10 @@ namespace HT.Web
                 app.UseHsts();
             }
 
+            app.UseSwaggerMid();
+            app.UseMiddleware(typeof(Ws.Middleware.ExceptionMiddleware));
             app.UseHttpsRedirection();
+
             app.UseMvc();
         }
     }

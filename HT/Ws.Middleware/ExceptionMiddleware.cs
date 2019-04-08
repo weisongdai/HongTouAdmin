@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Ws.CommonWeb.Logger.IServices;
+using Ws.CommonWeb.Models;
 
 namespace Ws.Middleware
 {
@@ -10,6 +13,7 @@ namespace Ws.Middleware
     /// </summary>
     public class ExceptionMiddleware
     {
+        private readonly ILoggerService loggerService;
         #region 构造函数 字段
         /// <summary>
         /// 请求上下文
@@ -19,10 +23,12 @@ namespace Ws.Middleware
         /// 构造函数
         /// </summary>
         /// <param name="next"></param>
-        public ExceptionMiddleware(RequestDelegate next)
+        public ExceptionMiddleware(RequestDelegate next, ILoggerService loggerService)
         {
             _next = next;
+            this.loggerService = loggerService;
         }
+
         #endregion
 
         #region 方法
@@ -48,7 +54,7 @@ namespace Ws.Middleware
         /// <param name="context">请求上下文</param>
         /// <param name="exception">异常信息</param>
         /// <returns></returns>
-        private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             if (exception == null)
                 return;
@@ -60,12 +66,11 @@ namespace Ws.Middleware
         /// <param name="context">请求上下文</param>
         /// <param name="exception">异常信息</param>
         /// <returns></returns>
-        private static async Task WriteExceptionAsync(HttpContext context, Exception exception)
+        private async Task WriteExceptionAsync(HttpContext context, Exception exception)
         {
             //记录日志
-            //LogHelper.Error(exception.GetBaseException().ToString());
+            await loggerService.Log(exception.Message, CommonWeb.Logger.LogType.系统错误, context.Request.Path.Value, context.Request.Host.Host);
 
-            //返回友好的提示
             var response = context.Response;
 
             //状态码
@@ -76,9 +81,17 @@ namespace Ws.Middleware
 
             response.ContentType = "application/json; charset=utf-8";
 
-            await response.WriteAsync("" + exception.Message).ConfigureAwait(false);
+            var model = new ResultModel()
+            {
+                Code = 1,
+                Data = exception.GetBaseException().Message,
+                Msg = exception.Message
+            };
+            string json = JsonConvert.SerializeObject(model);
 
-        } 
+            await response.WriteAsync(json).ConfigureAwait(false);
+
+        }
         #endregion
     }
 }

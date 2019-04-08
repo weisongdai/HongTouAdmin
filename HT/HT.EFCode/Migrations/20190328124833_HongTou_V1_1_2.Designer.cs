@@ -3,19 +3,20 @@ using System;
 using HT.EFCode.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HT.EFCode.Migrations
 {
     [DbContext(typeof(HTDbContext))]
-    partial class HTDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190328124833_HongTou_V1_1_2")]
+    partial class HongTou_V1_1_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
             modelBuilder.Entity("HT.EFCode.Entitys.PermissionEntity", b =>
                 {
@@ -89,6 +90,7 @@ namespace HT.EFCode.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Avatar")
+                        .IsRequired()
                         .HasMaxLength(254);
 
                     b.Property<DateTime>("CareatTime");
@@ -96,8 +98,10 @@ namespace HT.EFCode.Migrations
                     b.Property<string>("Email")
                         .HasMaxLength(50);
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
+                    b.Property<short>("Enabled")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue((short)1);
 
                     b.Property<int>("Gender")
                         .ValueGeneratedOnAdd()
